@@ -49,3 +49,45 @@ func main() {
 	}
 }
 ```
+
+## Unidirectional Channel Types
+channel作为函数参数时，其类型应指定为*receive-only*或*send-only*以避免误用。
+
+示例：
+```go
+func main() {
+	naturals := make(chan int)
+	squares := make(chan int)
+
+	go counter(naturals)
+	go squarer(squares, naturals)
+	printer(squares)
+}
+
+func counter(out chan<- int) {
+	for x := 0; x < 100; x++ {
+		out <- x
+	}
+	close(out)
+}
+
+func squarer(out chan<- int, in <-chan int) {
+	for x := range in {
+		out <- x * x
+	}
+	close(out)
+}
+
+func printer(in <-chan int) {
+	for x := range in {
+		fmt.Println(x)
+	}
+}
+```
+
+## Buffered Channels (eg. `ch := make(chan int, 3)`)
+If the channel is full, the send operation blocks until space is made available by another goroutine's receive. Conversely, if the
+channel is empty, a receive operation blocks until a value is sent by another goroutine.
+
+When applied to a channel, the built-in *cap* function returns the channel's buffer capacity, and the built-in *len* function returns
+the number of elements currently buffered.
