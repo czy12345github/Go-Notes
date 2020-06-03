@@ -17,3 +17,6 @@ https://github.com/AsynkronIT/protoactor-go
 ```
 protoc -I=. -I=$GOPATH/src -I=$PROTOBUFPATH/include --gogoslick_out=plugins=grpc:. *.proto
 ```
+
+## 相关书籍
+https://livebook.manning.com/book/reactive-design-patterns
