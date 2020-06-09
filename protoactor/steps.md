@@ -68,8 +68,8 @@ func (ctx *actorContext) Respond(response interface{}) {
 }
 ```
 
-## 设置 SenderMiddleware
-在发送消息之前或之后执行额外操作，参考示例 remoteheader。
+## 设置 Middleware
+SenderMiddleware 在发送消息之前或之后执行额外操作，参考示例 remoteheader。
 ```go
 type SenderMiddleware func(next SenderFunc) SenderFunc
 
@@ -83,4 +83,26 @@ func MySenderMiddleware(next SenderFunc) SenderFunc{
     ... // 发送消息后执行的操作
   }
 }
+```
+ReceiverMiddleware 同理，参考示例 receivepipeline
+
+## router
+在服务端用于创建 actor 池
+```go
+// props := router.NewRandomPool(5)
+// props := router.NewConsistentHashPool(5)
+// props := router.NewBroadcastPool(5)
+props := router.NewRoundRobinPool(5)
+// props.WithProducer 或 props.WithFunc 设置 actor 行为
+```
+在客户端用于设置多个可接收消息的 actor
+```go
+p1 := actor.NewPID("127.0.0.1:8101", "remote")
+p2 := actor.NewPID("127.0.0.1:8102", "remote")
+
+// remotePID := rootContext.Spawn(router.NewConsistentHashGroup(p1, p2))
+// remotePID := rootContext.Spawn(router.NewRoundRobinGroup(p1, p2))
+remotePID := rootContext.Spawn(router.NewRandomGroup(p1, p2))
+
+broadcastPID := rootContext.Spawn(router.NewBroadcastGroup(p1, p2))
 ```
