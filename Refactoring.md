@@ -2,8 +2,8 @@ Bad Smell | Refactorings
 -- | --
 Mysterious Name | Change Function Declaration; Rename Variable; Rename Field
 Duplicated Code | Slide Statements then Extract Function; Pull Up Method
-Long Function | Extract Function; [Replace Temp with Query](#ReplaceTempwithQuery); Introduce Parameter Object; Preserve Whole Object; [Replace Function with Command](#ReplaceFunctionwithCommand); Decompose Conditional; Replace Conditional with Polymorphism
-Long Parameter List | Replace Parameter with Query; Preserve Whole Object; Introduce Parameter Object; [Remove Flag Argument](#RemoveFlagArgument); Combine Functions into Class
+Long Function | Extract Function; [Replace Temp with Query](#replace-temp-with-query); Introduce Parameter Object; Preserve Whole Object; [Replace Function with Command](#replace-function-with-command); Decompose Conditional; Replace Conditional with Polymorphism
+Long Parameter List | Replace Parameter with Query; Preserve Whole Object; Introduce Parameter Object; [Remove Flag Argument](#remove-flag-argument); Combine Functions into Class
 Global Data | Encapsulate Variable
 Mutable Data | Encapsulate Variable; Split Variable; Slide Statements then Extract Function; Separate Query from Modifier; Remove Setting Method; [Replace Derived Variable with Query](#ReplaceDerivedVariablewithQuery); Combine Functions into Class; Combine Functions into Transform; Change Reference to Value
 [Divergent Change](#DivergentChange) | Split Phase; Move Function; Extract Function; Extract Class
